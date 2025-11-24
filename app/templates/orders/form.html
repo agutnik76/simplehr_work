@@ -67,19 +67,5 @@
         <a href="{{ url_for('orders.list_orders') }}" class="btn btn-secondary">Отмена</a>
     </div>
 </form>
-{% if config.DEBUG %}
-<div class="mt-4 p-3 bg-light border">
-    <h5>Debug Information</h5>
-    <p>Employee choices count: {{ form.employee_id.choices|length }}</p>
-    {% if form.employee_id.choices|length > 0 %}
-    <p>First few employee choices:</p>
-    <ul>
-        {% for choice in form.employee_id.choices[:5] %}
-        <li>{{ choice }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-{% endif %}
 
 {% endblock %}
