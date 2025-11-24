@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Отчеты{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Отчеты</h2>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Отчет по сотрудникам</h5>
+                <p class="card-text">Список всех сотрудников с фильтрацией по подразделениям.</p>
+                <a href="{{ url_for('reports.generate_report', type='employees') }}" class="btn btn-primary">Сформировать</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-umbrella-beach fa-3x text-info mb-3"></i>
+                <h5 class="card-title">Отчет по отпускам</h5>
+                <p class="card-text">Список всех отпусков с фильтрацией по датам и подразделениям.</p>
+                <a href="{{ url_for('reports.generate_report', type='vacations') }}" class="btn btn-info">Сформировать</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-sitemap fa-3x text-purple mb-3"></i>
+                <h5 class="card-title">Отчет по подразделениям</h5>
+                <p class="card-text">Подробная статистика по подразделениям с аналитикой.</p>
+                <a href="{{ url_for('reports.generate_report', type='department_report') }}" class="btn" style="background-color: #6f42c1; color: white;">Сформировать</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-exchange-alt fa-3x text-warning mb-3"></i>
+                <h5 class="card-title">Оборот кадров</h5>
+                <p class="card-text">Отчет по принятию и увольнению сотрудников за период.</p>
+                <a href="{{ url_for('reports.generate_report', type='turnover_report') }}" class="btn btn-warning">Сформировать</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

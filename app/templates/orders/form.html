@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{% if order %}Редактирование приказа{% else %}Создание приказа{% endif %}{% endblock %}
+
+{% block content %}
+<h2>{% if order %}Редактирование приказа{% else %}Создание приказа{% endif %}</h2>
+
+<form method="POST">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+        {{ form.employee_id.label(class="form-label") }}
+        {{ form.employee_id(class="form-select") }}
+        {% if form.employee_id.choices|length == 0 %}
+            <div class="text-warning">Нет доступных сотрудников. Пожалуйста, добавьте сотрудников в систему.</div>
+        {% endif %}
+        {% for error in form.employee_id.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        <label for="type" class="form-label">Тип приказа</label>
+        <select class="form-select" id="type" name="type" required>
+            <option value="">Выберите тип</option>
+            <option value="hire" {% if order and order.type == 'hire' %}selected{% endif %}>Прием</option>
+            <option value="transfer" {% if order and order.type == 'transfer' %}selected{% endif %}>Перевод</option>
+            <option value="dismissal" {% if order and order.type == 'dismissal' %}selected{% endif %}>Увольнение</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        {{ form.date_issued.label(class="form-label") }}
+        {{ form.date_issued(class="form-control") }}
+        {% for error in form.date_issued.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+
+    <div class="mb-3">
+        {{ form.new_department_id.label(class="form-label") }}
+        {{ form.new_department_id(class="form-select") }}
+        {% if form.new_department_id.errors %}
+            <div class="text-danger">
+                {% for error in form.new_department_id.errors %}
+                    <small>{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.new_position_id.label(class="form-label") }}
+        {{ form.new_position_id(class="form-select") }}
+        {% if form.new_position_id.errors %}
+            <div class="text-danger">
+                {% for error in form.new_position_id.errors %}
+                    <small>{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="d-flex gap-2">
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('orders.list_orders') }}" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>
+{% if config.DEBUG %}
+<div class="mt-4 p-3 bg-light border">
+    <h5>Debug Information</h5>
+    <p>Employee choices count: {{ form.employee_id.choices|length }}</p>
+    {% if form.employee_id.choices|length > 0 %}
+    <p>First few employee choices:</p>
+    <ul>
+        {% for choice in form.employee_id.choices[:5] %}
+        <li>{{ choice }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
