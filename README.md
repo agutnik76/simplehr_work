@@ -86,7 +86,11 @@
 5. **Установите зависимости:**
 
    ```bash
-   pip install -r requirements.txt
+   ./install.sh                    #Linux
+   ```
+
+   ```bash
+   .\install                       #Windows
    ```
 
 6. **База данных:**
