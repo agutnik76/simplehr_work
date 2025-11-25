@@ -45,14 +45,11 @@ def vacation_calendar():
         # Загружаем отпуска с подгрузкой связанных сотрудников
         vacations = Vacation.query.options(
             db.joinedload(Vacation.employee)
+        ).filter(
+            Vacation.start_date <= end_date,
+            Vacation.end_date >= start_date,
+            # Vacation.status == 'approved'  # Показываем только одобренные отпуска
         ).all()
-        #
-        #
-        #     filter(
-        #     Vacation.start_date <= end_date,
-        #     Vacation.end_date >= start_date,
-        #     # Vacation.status == 'approved'  # Показываем только одобренные отпуска
-        # ).all()
 
         logger.info(f"Found {len(vacations)} approved vacations for {year}-{month:02d}")
 
