@@ -59,8 +59,13 @@
    python -m venv venv
    ```
    ```bash
-   source venv/bin/activate  # В Windows: venv\Scripts\activate
+   source venv/bin/activate  # Linux
    ```
+
+   ```bash
+   venv\Scripts\activate    # В Windows
+   ```
+
 
 4.  **(При необходимости) Обновите pip и virtualenv:**
 
